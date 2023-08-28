@@ -2,6 +2,8 @@ import React from "react";
 import { useGetChatQuery, useGetChatsQuery } from "../redux/service/api";
 import { AiOutlineSearch } from "react-icons/ai";
 import ChatCard from "../components/chats/ChatCard";
+import ReciviedMessageCard from "../components/messages/ReciviedMessageCard";
+import SendedMessageCard from "../components/messages/SendedMessageCard";
 
 const ChatPage = () => {
   const { data, error, isFetching, isLoading, isSuccess } = useGetChatsQuery();
@@ -11,20 +13,32 @@ const ChatPage = () => {
         <div className="text-gray-400 flex items-center justify-between">
           <h3 className="text-2xl font-bold capitalize">mingle</h3>
           <div>
-            <AiOutlineSearch size={30}/>
+            <AiOutlineSearch size={30} />
           </div>
         </div>
       </div>
       <div className="">
         <div className="grid md:grid-cols-3">
           <div className="md:col-span-1">
-            <div className="max-h-[88.6vh] min-h-[88.6vh] overflow-y-auto px-2 py-2">
-               {
-                Array.from({length:100}).map((i, index) => <ChatCard key={index}/>)
-               }
+            <div className="max-h-[88.6vh] min-h-[88.6vh] overflow-y-auto">
+              {Array.from({ length: 100 }).map((i, index) => (
+                <ChatCard key={index} />
+              ))}
             </div>
           </div>
-          <div className="md:col-span-2 hidden md:visible">how are you</div>
+          <div className="relative md:col-span-2 hidden md:block ">
+            <div>
+              <div className="max-h-[80.6vh] min-h-[80.6vh] overflow-y-auto bg-gray-300 px-5 py-5 flex flex-col gap-4">
+                {Array.from({ length: 20 }).map((i, index) => (
+                  <>
+                    <ReciviedMessageCard key={`a${index}`}/>
+                    <SendedMessageCard key={`${index}index`}/>
+                  </>
+                ))}
+              </div>
+              <div className="max-h-[8vh] min-h-[8vh]">hellow</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
