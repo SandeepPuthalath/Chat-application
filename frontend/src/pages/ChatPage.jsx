@@ -4,12 +4,15 @@ import { AiOutlineSearch } from "react-icons/ai";
 import ChatCard from "../components/chats/ChatCard";
 import ReciviedMessageCard from "../components/messages/ReciviedMessageCard";
 import SendedMessageCard from "../components/messages/SendedMessageCard";
+import { BsEmojiSmile } from "react-icons/bs";
+import { TiAttachment } from "react-icons/ti";
+import { IoIosSend } from "react-icons/io";
 
 const ChatPage = () => {
   const { data, error, isFetching, isLoading, isSuccess } = useGetChatsQuery();
   return (
     <div>
-      <div className="px-5 py-5 bg-gray-700 shadow-md">
+      <div className="px-5 py-5 bg-gray-800 shadow-md">
         <div className="text-gray-400 flex items-center justify-between">
           <h3 className="text-2xl font-bold capitalize">mingle</h3>
           <div>
@@ -26,17 +29,30 @@ const ChatPage = () => {
               ))}
             </div>
           </div>
-          <div className="relative md:col-span-2 hidden md:block ">
+          <div className="md:col-span-2 hidden md:block ">
             <div>
-              <div className="max-h-[80.6vh] min-h-[80.6vh] overflow-y-auto bg-gray-300 px-5 py-5 flex flex-col gap-4">
+              <div className="max-h-[78.6vh] min-h-[78.6vh] overflow-y-auto bg-gray-900 px-2 py-2 flex flex-col gap-4">
                 {Array.from({ length: 20 }).map((i, index) => (
                   <>
-                    <ReciviedMessageCard key={`a${index}`}/>
-                    <SendedMessageCard key={`${index}index`}/>
+                    <ReciviedMessageCard key={`a${index}`} />
+                    <SendedMessageCard key={`${index}index`} />
                   </>
                 ))}
               </div>
-              <div className="max-h-[8vh] min-h-[8vh]">hellow</div>
+              <div className="max-h-[10vh] min-h-[10vh] flex text-gray-300 py-2">
+                <div className="flex px-5 py-3 items-center gap-5">
+                  <BsEmojiSmile size={22} className="cursor-pointer" />
+                  <TiAttachment size={30} className="cursor-pointer" />
+                </div>
+                <div className=" w-full flex">
+                  <input className="block w-full bg-transparent border-b-2 focus:border-none px-3 border-gray-500" placeholder="Type somthing . . . ." />
+                </div>
+                <div className="flex px-8">
+                  <button className=" text-blue-500  shadow-sm">
+                    <IoIosSend size={38} className="" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -65,9 +81,9 @@ const ChatPage = () => {
 //      ));
 //  }
 
-export const ChatDetails = ({ id }) => {
-  const data = useGetChatQuery(id);
-  return <pre>{JSON.stringify(data, undefined, 2).substring(0, 20)}</pre>;
-};
+// export const ChatDetails = ({ id }) => {
+//   const data = useGetChatQuery(id);
+//   return <pre>{JSON.stringify(data, undefined, 2).substring(0, 20)}</pre>;
+// };
 
 export default ChatPage;

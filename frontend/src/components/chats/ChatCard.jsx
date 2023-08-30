@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 const ChatCard = () => {
   return (
     <Link>
-      <div className="w-full h-14  hover:bg-gray-500">
-        <div className="flex gap-3 px-2 py-2 ">
+      <div className="w-full h-16 hover:bg-gray-700">
+        <div className="flex items-center gap-3 px-2 py-2 ">
           <div className="flex">
-            <div className="bg-gray-500 rounded-full p-1 text-gray-700">
+            <div className="bg-gray-500 rounded-full p-2 text-gray-700">
               <BsFillPersonFill size={30} />
             </div>
           </div>

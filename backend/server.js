@@ -1,15 +1,20 @@
 const express = require("express");
 const chats = require("./data/data");
-const dotenv = require("dotenv");
 const morgan = require("morgan");
 const cors = require("cors");
+const configKeys = require("./config");
+const routes = require("./routes");
 
 const app = express();
-dotenv.config();
+
+app.use(express.json())
 app.use(morgan("dev"))
 app.use(cors({
-    origin:["http://localhost:3000"]
+    origin:[configKeys.CLIENT_URL]
 }))
+
+
+routes(app)
 
 app.get("/", (req, res) => {
     res.send("Api is running...")
@@ -28,7 +33,9 @@ app.get('/api/chat/:id', (req, res) =>{
     res.send(singleChat)
 })
 
-const PORT = process.env.PORT || 5000
+const PORT = configKeys.PORT || 5000
+
+console.log(PORT)
 
 app.listen(PORT, console.log(`Server starting on PORT ${PORT}`))
 

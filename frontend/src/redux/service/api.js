@@ -23,4 +23,5 @@ export const chatsApi = createApi({
 })
 
 
+
 export const { useGetChatsQuery, useGetChatQuery } = chatsApi
