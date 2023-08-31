@@ -77,7 +77,7 @@ const LoginComp = ({ handleChangeToSignup }) => {
               <div className="w-72 py-8">
                 <button
                   type="submit"
-                  className="bg-gray-50 w-full rounded-md py-1 text-gray-900 uppercase text-xl font-bold"
+                  className="bg-gray-50 w-full rounded-md py-1 text-gray-900 uppercase text-xl font-bold hover:bg-transparent border-2 hover:text-gray-50"
                 >
                   {/* this is spinner  */}
                   {/* <div role="status">

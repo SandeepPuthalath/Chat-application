@@ -7,11 +7,9 @@ function authRouter() {
 
     const router = express.Router();
 
+    router.route("/login").post(controller.handleLogin);
 
-    router.post("/login", controller.handleLogin);
-
-    router.post("/register", controller.handleRegister);
-
+    router.route("/register").post(controller.handleRegister);
 
     return router
 
