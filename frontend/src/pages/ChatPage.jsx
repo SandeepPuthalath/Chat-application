@@ -10,6 +10,7 @@ import { IoIosSend } from "react-icons/io";
 
 const ChatPage = () => {
   const { data, error, isFetching, isLoading, isSuccess } = useGetChatsQuery();
+  const [messages, setMessages] = React.useState([]);
   return (
     <div>
       <div className="px-5 py-5 bg-gray-800 shadow-md">
@@ -24,20 +25,26 @@ const ChatPage = () => {
         <div className="grid md:grid-cols-3">
           <div className="md:col-span-1">
             <div className="max-h-[88.6vh] min-h-[88.6vh] overflow-y-auto">
-              {Array.from({ length: 100 }).map((i, index) => (
-                <ChatCard key={index} />
+              {data?.map((chat) => (
+                <ChatCard key={chat?._id} {...chat} />
               ))}
             </div>
           </div>
           <div className="md:col-span-2 hidden md:block ">
             <div>
               <div className="max-h-[78.6vh] min-h-[78.6vh] overflow-y-auto bg-gray-900 px-2 py-2 flex flex-col gap-4">
-                {Array.from({ length: 20 }).map((i, index) => (
-                  <>
-                    <ReciviedMessageCard key={`a${index}`} />
-                    <SendedMessageCard key={`${index}index`} />
-                  </>
-                ))}
+                {!messages.length ? (
+                  Array.from({length:100}).map((i, index) => (
+                    <>
+                      <ReciviedMessageCard key={`a${index}`} />
+                      <SendedMessageCard key={`${index}index`} />
+                    </>
+                  ))
+                ) : (
+                  <div className="max-h-[75.6vh] min-h-[75.6vh] flex justify-center items-center text-gray-300">
+                    Select a chat to start messaging
+                  </div>
+                )}
               </div>
               <div className="max-h-[10vh] min-h-[10vh] flex text-gray-300 py-2">
                 <div className="flex px-5 py-3 items-center gap-5">
@@ -45,7 +52,10 @@ const ChatPage = () => {
                   <TiAttachment size={30} className="cursor-pointer" />
                 </div>
                 <div className=" w-full flex">
-                  <input className="block w-full bg-transparent border-b-2 focus:border-none px-3 border-gray-500" placeholder="Type somthing . . . ." />
+                  <input
+                    className="block w-full bg-transparent border-b-2 focus:border-none px-3 border-gray-500"
+                    placeholder="Type somthing . . . ."
+                  />
                 </div>
                 <div className="flex px-8">
                   <button className=" text-blue-500  shadow-sm">

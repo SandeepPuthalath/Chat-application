@@ -2,7 +2,7 @@ import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const ChatCard = () => {
+const ChatCard = ({chatName}) => {
   return (
     <Link>
       <div className="w-full h-16 hover:bg-gray-700">
@@ -15,7 +15,7 @@ const ChatCard = () => {
           <div className="flex flex-col w-full">
             <div className="flex justify-between items-center">
               <h4 className="text-sm font-bold capitalize  text-gray-200">
-                sandeep
+                {chatName}
               </h4>
               <h5 className="text-xs text-gray-200">11:00 am</h5>
             </div>

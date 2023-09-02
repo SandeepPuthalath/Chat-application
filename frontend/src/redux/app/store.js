@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { chatsApi } from "../service/api"
 import { authApi } from "../service/authApi";
 

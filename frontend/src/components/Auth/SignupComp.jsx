@@ -1,10 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import {
-  useRegisterUserMutation,
-  useRegisterUserQuery,
-} from "../../redux/service/authApi";
+import { useRegisterUserMutation } from "../../redux/service/authApi";
 import { toast } from "react-toastify";
 
 const validationSchema = Yup.object().shape({
@@ -16,7 +13,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignupComp = ({ handleChangeToLogin }) => {
-  const [registerUser, { data, isLoading, isSuccess, isError, error }] =
+  const [registerUser, { isLoading, isError, error }] =
     useRegisterUserMutation();
   const formik = useFormik({
     initialValues: {
@@ -26,11 +23,11 @@ const SignupComp = ({ handleChangeToLogin }) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      registerUser({ ...values }).then(() => {
-        if (isSuccess) {
+      registerUser({ ...values }).then((response) => {
+        if (!response.error) {
           formik.resetForm();
           handleChangeToLogin();
-          toast.success("Successfully registered");
+          return toast.success("Successfully created");
         }
       });
     },
@@ -43,9 +40,11 @@ const SignupComp = ({ handleChangeToLogin }) => {
           <h3 className="text-xl font-bold uppercase">Register now</h3>
         </div>
         <div className="relative flex w-full justify-center items-center">
-          {isError && <span className="absolute text-md text-red-500">
-           {error?.data?.message}
-          </span>}
+          {isError && (
+            <span className="absolute text-md text-red-500">
+              {error?.data?.message}
+            </span>
+          )}
         </div>
         <div className="flex justify-center items-center">
           <form onSubmit={formik.handleSubmit}>
@@ -122,7 +121,9 @@ const SignupComp = ({ handleChangeToLogin }) => {
               <div className="w-72 py-8">
                 <button
                   type="submit"
-                  className="bg-gray-50 w-full rounded-md py-1 text-gray-900 uppercase text-xl font-bold hover:bg-transparent border-2 hover:text-gray-50"
+                  className={`bg-gray-50 w-full rounded-md py-1 text-gray-900 uppercase text-xl font-bold border-2 ${
+                    !isLoading && "hover:bg-transparent hover:text-gray-50"
+                  }`}
                   disabled={isLoading}
                 >
                   {isLoading ? (
