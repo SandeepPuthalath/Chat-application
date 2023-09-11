@@ -1,17 +1,20 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { chatsApi } from "../service/api"
 import { authApi } from "../service/authApi";
-
+import { apiSlice } from "./api/apiSlice";
+import authReducer from "../service/auth/authSlice"
 
 const store = configureStore({
     reducer: {
         [chatsApi.reducerPath]: chatsApi.reducer,
-        [authApi.reducerPath]: authApi.reducer,
+        [apiSlice.reducerPath]: apiSlice.reducer,
+        auth: authReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
-        .concat(chatsApi.middleware)
-        .concat(authApi.middleware)
+            .concat(chatsApi.middleware)
+            .concat(authApi.middleware),
+    devTools: true
 })
 
 

@@ -32,6 +32,8 @@ userSchema.pre("save", async function (next) {
     }
 })
 
+userSchema.index({ email: 1 });
+
 
 const User = mongoose.model("user", userSchema);
 module.exports = User

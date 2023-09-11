@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import Homepage from './pages/Homepage';
 import ChatPage from './pages/ChatPage';
 import { Provider } from 'react-redux';
 import store from './redux/app/store';
 
+const authTokens = JSON.parse(localStorage.getItem("authTokens"));
+
+console.log(authTokens, "this is index")
 
 const router = createBrowserRouter([
   {
@@ -16,11 +19,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Homepage />
+        element: !authTokens?.access ? <Homepage /> : <Navigate to="/chats" />,
       },
       {
         path: '/chats',
-        element: <ChatPage />,
+        element: authTokens?.access ? <ChatPage /> : <Navigate to="/"/>,
       }
     ]
   },

@@ -7,17 +7,21 @@ import SendedMessageCard from "../components/messages/SendedMessageCard";
 import { BsEmojiSmile } from "react-icons/bs";
 import { TiAttachment } from "react-icons/ti";
 import { IoIosSend } from "react-icons/io";
+import {BsFillPersonFill} from "react-icons/bs"
+import AccountDropdown from "../components/Account/AccountDropdown";
 
 const ChatPage = () => {
   const { data, error, isFetching, isLoading, isSuccess } = useGetChatsQuery();
   const [messages, setMessages] = React.useState([]);
   return (
-    <div>
-      <div className="px-5 py-5 bg-gray-800 shadow-md">
+    <div className="bg-gray-800 h-screen">
+      <div className="px-10 py-4 shadow-md">
         <div className="text-gray-400 flex items-center justify-between">
           <h3 className="text-2xl font-bold capitalize">mingle</h3>
-          <div>
+          <div className="flex gap-2 items-center">
             <AiOutlineSearch size={30} />
+            {/* <BsFillPersonFill size={30} /> */}
+            <AccountDropdown />
           </div>
         </div>
       </div>
@@ -34,7 +38,7 @@ const ChatPage = () => {
             <div>
               <div className="max-h-[78.6vh] min-h-[78.6vh] overflow-y-auto bg-gray-900 px-2 py-2 flex flex-col gap-4">
                 {!messages.length ? (
-                  Array.from({length:100}).map((i, index) => (
+                  Array.from({ length: 100 }).map((i, index) => (
                     <>
                       <ReciviedMessageCard key={`a${index}`} />
                       <SendedMessageCard key={`${index}index`} />

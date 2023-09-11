@@ -4,7 +4,7 @@ import { configKeys } from "../../constants";
 export const authApi = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: configKeys.BASE_URL,
+        baseUrl: `${configKeys.BASE_URL}/auth`,
         mode: "cors"
     }),
     endpoints: (builder) => ({
